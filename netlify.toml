@@ -1,4 +1,0 @@
-[build]
-  base = "nexhire-client"
-  publish = "dist"
-  command = "npm run build"

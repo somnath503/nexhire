@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  User, Building2, Briefcase, AlertTriangle, Loader2, CheckCircle2, 
-  Link as LinkIcon, FileText, UploadCloud, Eye, Edit3, MapPin, Mail, ExternalLink, ArrowLeft, GraduationCap, Award
+import {
+  User, Building2, Briefcase, Loader2, CheckCircle2,
+  Link as LinkIcon, FileText, UploadCloud, Eye, Edit3, MapPin, Mail, ArrowLeft, GraduationCap, Award
 } from 'lucide-react';
 import { API_URL } from '../lib/api';
 

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ArrowRight, Sparkles, Target, Users, Zap, CheckCircle, BarChart3, ShieldCheck } from 'lucide-react';
-
+import { Menu, X, ArrowRight, Sparkles, Target, Users, BarChart3, ShieldCheck } from 'lucide-react';
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

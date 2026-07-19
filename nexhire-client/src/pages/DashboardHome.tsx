@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Users, Briefcase, Clock, FileText, CheckCircle2, XCircle, MapPin, Building2, RefreshCw, Loader2 } from 'lucide-react';
+import { Users, Briefcase, Clock, CheckCircle2, XCircle, MapPin, Building2, RefreshCw, Loader2 } from 'lucide-react';
 import CreateJobModal from '../components/CreateJobModal';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../lib/api';
