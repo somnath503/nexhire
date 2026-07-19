@@ -18,6 +18,7 @@ const allowedOrigins: string[] = [
 ].filter((origin): origin is string => Boolean(origin));
 
 app.use(cors({ origin: allowedOrigins }));
+console.log('Allowed origins:', allowedOrigins);
 
 app.use(express.json());
 
