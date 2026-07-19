@@ -1,3 +1,5 @@
+import dns from 'dns';
+dns.setDefaultResultOrder('ipv4first');
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -6,6 +8,7 @@ import authRoutes from './routes/auth';
 import usersRoutes from './routes/users';
 import jobsRoutes from './routes/jobs';
 import applicationsRoutes from './routes/applications';
+
 
 dotenv.config();
 
