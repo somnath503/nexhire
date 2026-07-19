@@ -2,17 +2,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const sendOTP = async (email: string, otp: string): Promise<void> => {
-  const res = await fetch("https://api.resend.com/emails", {
+  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+      "api-key": process.env.BREVO_API_KEY as string,
       "Content-Type": "application/json",
+      "Accept": "application/json",
     },
     body: JSON.stringify({
-      from: "NexHire <onboarding@resend.dev>",
-      to: email,
+      sender: { name: "NexHire", email: process.env.BREVO_SENDER_EMAIL },
+      to: [{ email }],
       subject: "Your NexHire Verification Code",
-      html: `
+      htmlContent: `
         <div style="font-family:Arial,sans-serif;padding:30px;background:#f4f6f8;">
           <div style="max-width:500px;margin:auto;background:white;border-radius:10px;padding:30px;border:1px solid #e5e5e5;">
             <h2 style="color:#2563eb;text-align:center;">NexHire Email Verification</h2>
@@ -33,7 +34,7 @@ export const sendOTP = async (email: string, otp: string): Promise<void> => {
 
   if (!res.ok) {
     const errText = await res.text();
-    console.error("Resend API error:", errText);
+    console.error("Brevo API error:", errText);
     throw new Error("Failed to send OTP email");
   }
 
