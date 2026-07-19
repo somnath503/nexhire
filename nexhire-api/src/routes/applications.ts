@@ -34,7 +34,7 @@ router.get('/candidate/:candidateId', async (req: Request, res: Response) => {
       `SELECT job_id FROM applications WHERE candidate_id = $1`, 
       [candidateId]
     );
-    res.json(result.rows.map(row => row.job_id));
+    res.json(result.rows.map((row: { job_id: number }) => row.job_id));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch user applications' });
