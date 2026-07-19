@@ -7,6 +7,7 @@ const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret';
 
 // 1. REQUEST OTP (Terminal Logger)
+// 1. REQUEST OTP (Terminal Logger)
 router.post('/request-otp', async (req: Request, res: Response): Promise<void> => {
   const { email } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -19,20 +20,28 @@ router.post('/request-otp', async (req: Request, res: Response): Promise<void> =
       [email, otp, expiresAt]
     );
 
-    await sendOTP(email, otp);
+    // Try sending email, but don't let a failure block the OTP flow
+    try {
+      await sendOTP(email, otp);
+    } catch (emailError) {
+      console.error("Email send failed (non-blocking):", emailError);
+    }
 
-  res.json({
-  message: "OTP sent successfully."
-});
+    // Always log OTP server-side as a fallback (visible in Render logs)
+    console.log(`🔐 OTP for ${email}: ${otp}`);
+
+    res.json({
+      message: "OTP generated. Check your email or contact support if not received."
+    });
   } catch (error) {
-  console.error("========== OTP ERROR ==========");
-  console.error(error);
-  console.error("===============================");
+    console.error("========== OTP ERROR ==========");
+    console.error(error);
+    console.error("===============================");
 
-  res.status(500).json({
-    error: "Failed to send OTP"
-  });
-}
+    res.status(500).json({
+      error: "Failed to generate OTP"
+    });
+  }
 });
 
 // 2. SIGNUP (Verifies OTP + Saves Password)
